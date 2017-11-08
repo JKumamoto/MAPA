@@ -7,7 +7,12 @@ GRANT SELECT, INSERT, DELETE, UPDATE ON MAPA.* TO 'mapa'@'localhost';
 
 USE `MAPA`;
 
+DROP TABLE IF EXISTS `entidade_setor`;
+DROP TABLE IF EXISTS `entidade_tags`;
+DROP TABLE IF EXISTS `Setor`;
+DROP TABLE IF EXISTS `Tag`;
 DROP TABLE IF EXISTS `Entidade`;
+
 CREATE TABLE `Entidade` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`nome` varchar(100) NOT NULL,
@@ -20,14 +25,12 @@ CREATE TABLE `Entidade` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `Tag`;
 CREATE TABLE `Tag` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`nome` varchar(100) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `entidade_tags`;
 CREATE TABLE `entidade_tags` (
 	`entidade_id` int(11) NOT NULL,
 	`tag_id` int(11) NOT NULL,
@@ -38,21 +41,19 @@ CREATE TABLE `entidade_tags` (
 	CONSTRAINT `fk_tag` FOREIGN KEY (`tag_id`) REFERENCES `Tag` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `Setor`;
 CREATE TABLE `Setor` (
 	`id` int(11) NOT NULL AUTO_INCREMENT,
 	`nome` varchar(100) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `entidade_setor`;
 CREATE TABLE `entidade_setor` (
 	`entidade_id` int(11) NOT NULL,
 	`setor_id` int(11) NOT NULL,
 	PRIMARY KEY (`entidade_id`, `setor_id`),
-	KEY `fk_entidade` (`entidade_id`),
+	KEY `ck_entidade` (`entidade_id`),
 	KEY `fk_setor` (`setor_id`),
-	CONSTRAINT `fk_entidade` FOREIGN KEY (`entidade_id`) REFERENCES `Entidade` (`id`),
+	CONSTRAINT `ck_entidade` FOREIGN KEY (`entidade_id`) REFERENCES `Entidade` (`id`),
 	CONSTRAINT `fk_setor` FOREIGN KEY (`setor_id`) REFERENCES `Setor` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -52,6 +52,10 @@ public class Entidade{
 	@JoinTable(name = "entidade_tags", joinColumns = @JoinColumn(name = "entidade_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private Set<Tag> tags;
 
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "entidade_setor", joinColumns = @JoinColumn(name = "entidade_id"), inverseJoinColumns = @JoinColumn(name = "setor_id"))
+	private Set<Setor> setores;
+
 	public int getId(){
 		return id;
 	}
@@ -90,14 +94,6 @@ public class Entidade{
 
 	public void setFundacao(Calendar fundacao){
 		this.fundacao=fundacao;
-	}
-
-	public String getSetor(){
-		return setor;
-	}
-
-	public void setSetor(String setor){
-		this.setor=setor;
 	}
 
 	public boolean getReconhecimento_institucional(){
