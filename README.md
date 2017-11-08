@@ -4,7 +4,8 @@ A aplicação funciona como um web site com usuários representantes das entidad
 
 Isso é bom para as entidades que tem outro meio de divulgação compartilhado. Isso é bom para a universidade que consegue mapear a atuação de seu corpo dicente nas atividades extra-curriculares. Isso é bom para os alunos que passam a conhecer diferentes grupos que podem atuar nas áreas de seu interesse ou ainda para exergar as áreas em que faltam ser criados estes grupos.
 
-# Versão 1.0.0 (Novembro 2017)
+# Versão 1.0.0 
+Novembro, 2017
 
 
 
