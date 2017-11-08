@@ -3,11 +3,15 @@ package br.edu.ufabc.MAPA.Model;
 import java.util.Calendar;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -86,14 +90,6 @@ public class Entidade{
 
 	public void setFundacao(Calendar fundacao){
 		this.fundacao=fundacao;
-	}
-
-	public String getTipo(){
-		return tipo;
-	}
-
-	public void setTipo(String tipo){
-		this.tipo=tipo;
 	}
 
 	public String getSetor(){

@@ -7,7 +7,7 @@ import br.edu.ufabc.MAPA.Model.Tag;
 
 @Repository("TagRepository")
 public interface TagRepository extends JpaRepository<Tag, Integer>{
-	Tag findByTag(String Tag);
+	Tag findByNome(String Nome);
 
 }
 
