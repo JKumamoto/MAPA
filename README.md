@@ -1,3 +1,4 @@
+# Mapa Universitário: Entidades Estudantis
 A plataforma Mapa Universitário é um indexador para integração da comunidade universitária aplicado ao cenário de entidades estudantis.
 A aplicação funciona como um web site com usuários representantes das entidades cadastrandos perfis públicos, que são indexados e organizados conforme especificidades de atuação e descrição de cada entidade estudantil. Dessa forma, diferentes membros de uma comunidade acadêmica podem ter acesso de maneira rápida e centralizada a todo o cenário de entidades estundantis que se desenvolve na sua universidade.
 
