@@ -13,6 +13,11 @@ public class MainController{
     public String home(){
         return "home";
     }
+
+	@RequestMapping(value="login", method=RequestMethod.GET)
+	public String login(){
+		return "login";
+	}
     
     @ResponseBody
     @RequestMapping(value="/greeting",method = RequestMethod.GET)
