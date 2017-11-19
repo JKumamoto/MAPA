@@ -1,17 +1,11 @@
 <!DOCTYPE HTML>
-  
-<html>
+<html xmlns:th="http://www.thymeleaf.org">  
 <head>
-	<title>Home</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/css/dropdown.css" />
-	<link rel="stylesheet" href="/css/animate.css" />
+		<link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
 </head>
 <body>
 
-<div th:fragment="header">
+<th:block th:fragment="header">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -21,100 +15,150 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 		</button>
-			<a class="navbar-brand" href="home">MAPA</a>
+			<a class="navbar-brand" href="/">MAPA</a>
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="home">Home</a></li>
+				<li class="active"><a href="/">Home</a></li>
 				<li><a href="">About</a></li>
 			</ul>
+			<div class="col-sm-3 col-md-3">
+				<form class="navbar-form" role="search">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search" name="q" />
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+						</div>
+					</div>
+				</form>
+			</div>
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown">
-					<a href="http://phpoll.com/register" class="dropdown-toggle" data-toggle="dropdown">Register <span class="caret"></span></a>
-					<ul class="dropdown-menu dropdown-lr animated flipInX" role="menu">
-						<div class="col-lg-12">
-							<div class="text-center"><h3><b>Register</b></h3></div>
-							<form id="ajax-register-form" action="http://phpoll.com/register/process" method="post" role="form" autocomplete="off">
-								<div class="form-group">
-									<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value=""></input>
-								</div>
-								<div class="form-group">
-									<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value=""></input>
-								</div>
-								<div class="form-group">
-									<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"></input>
-								</div>
-								<div class="form-group">
-									<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password"></input>
-								</div>
-								<div class="form-group">
-									<div class="row">
-										<div class="col-xs-6 col-xs-offset-3">
-											<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-info" value="Register Now"></input>
-										</div>
-									</div>
-								</div>
-								<input type="hidden" class="hide" name="token" id="token" value="7c6f19960d63f53fcd05c3e0cbc434c0"></input>
-							</form>
-						</div>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="http://phpoll.com/login" class="dropdown-toggle" data-toggle="dropdown">Log In <span class="caret"></span></a>
-					<ul class="dropdown-menu dropdown-lr animated slideInRight" role="menu">
-						<div class="col-lg-12">
-							<div class="text-center"><h3><b>Log In</b></h3></div>
-							<form id="ajax-login-form" action="http://phpoll.com/login/process" method="post" role="form" autocomplete="off">
-								<div class="form-group">
-									<label for="username">Username</label>
-									<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="" autocomplete="off"></input>
-								</div>
-
-								<div class="form-group">
-									<label for="password">Password</label>
-									<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" autocomplete="off"></input>
-								</div>
-
-								<div class="form-group">
-									<div class="row">
-										<div class="col-xs-7">
-											<input type="checkbox" tabindex="3" name="remember" id="remember"></input>
-											<label for="remember"> Remember Me</label>
-										</div>
-										<div class="col-xs-5 pull-right">
-											<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-success" value="Log In"></input>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="text-center">
-												<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
-											</div>
-										</div>
-									</div>
-								</div>
-								<input type="hidden" class="hide" name="token" id="token" value="a465a2791ae0bae853cf4bf485dbe1b6"></input>
-							</form>
-						</div>
-					</ul>
+				<li>
+					<a href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Register</a>
 				</li>
 			</ul>
 		</div>
 	</div>
 </nav>
-</div>
-    
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 text-center">Be sure to include <a href="http://daneden.github.io/animate.css/" target="_blank" title="animate.css">animate.css</a> for the animations</div>
-    </div>
+ 
+
+<!-- Modal -->
+<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<br/>
+			<div class="bs-example bs-example-tabs">
+				<ul id="myTab" class="nav nav-tabs">
+					<li class="active"><a href="#signin" data-toggle="tab">Login</a></li>
+					<li class=""><a href="#signup" data-toggle="tab">Registrar</a></li>
+				</ul>
+			</div>
+			<div class="modal-body">
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane fade active in" id="signin">
+						<form action="login" method="POST" class="form-horizontal">
+						<fieldset>
+						<!-- Sign In Form -->
+						<!-- Text input-->
+						<div class="control-group">
+							<label class="control-label" for="userid">Email:</label>
+							<div class="controls">
+								<input required="" id="userid" name="userid" type="text" class="form-control" placeholder="entidade@entidade.com.br"></input>
+							</div>
+						</div>
+
+						<!-- Password input-->
+						<div class="control-group">
+							<label class="control-label" for="passwordinput">Password:</label>
+							<div class="controls">
+								<input required="" id="passwordinput" name="passwordinput" class="form-control" type="password" placeholder="********"></input>
+							</div>
+						</div>
+
+						<!-- Multiple Checkboxes (inline) -->
+						<div class="control-group">
+							<div class="controls">
+								<!-- <label class="checkbox inline" for="rememberme-0"> -->
+								<input type="checkbox" name="rememberme" id="rememberme-0" value="Remember me"></input>
+								<label class="control-label" for="rememberme">Remember me</label>
+							</div>
+						</div>
+
+						<!-- Button -->
+						<div class="control-group">
+							<label class="control-label" for="signin"></label>
+							<div class="controls">
+								<button id="signin" name="signin" class="btn btn-success">Sign In</button>
+							</div>
+						</div>
+						</fieldset>
+						</form>
+					</div>
+
+					<div class="tab-pane fade" id="signup">
+						<form class="form-horizontal">
+						<fieldset>
+						<!-- Sign Up Form -->
+						<!-- Text input-->
+						<div class="control-group">
+							<label class="control-label" for="Email">Email:</label>
+							<div class="controls">
+								<input id="Email" name="Email" class="form-control" type="text" placeholder="JoeSixpack@sixpacksrus.com" required=""></input>
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="control-group">
+							<label class="control-label" for="userid">Alias:</label>
+							<div class="controls">
+								<input id="userid" name="userid" class="form-control" type="text" placeholder="JoeSixpack" required=""></input>
+							</div>
+						</div>
+						
+						<!-- Password input-->
+						<div class="control-group">
+							<label class="control-label" for="password">Password:</label>
+							<div class="controls">
+								<input id="password" name="password" class="form-control" type="password" placeholder="********" required=""></input>
+								<em>1-8 Characters</em>
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="control-group">
+							<label class="control-label" for="reenterpassword">Re-Enter Password:</label>
+							<div class="controls">
+								<input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="********" required=""></input>
+							</div>
+						</div>
+						
+						<!-- Button -->
+						<div class="control-group">
+							<label class="control-label" for="confirmsignup"></label>
+							<div class="controls">
+								<button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
+							</div>
+						</div>
+						</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="modal-footer">
+				<center>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</center>
+			</div>
+		</div>
+	</div>
 </div>
 
-<script src="/jquery/jquery-3.2.1.min.js"></script>    
-<script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<script src="/js/getrequest.js"></script>
+</th:block>
+
+	<script src="/jquery/jquery-3.2.1.min.js" ></script>
+	<script src="/bootstrap-3.3.7/js/bootstrap.min.js" ></script>
+	<script src="/js/getrequest.js" ></script>
+
 </body>
 </html>

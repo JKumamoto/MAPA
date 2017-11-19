@@ -1,26 +1,24 @@
 <!DOCTYPE HTML>
-  
-<html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Home</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
 	<link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/css/dropdown.css" />
-	<link rel="stylesheet" href="/css/animate.css" />
+
 </head>
 <body>
 
 <div th:replace="fragments/header :: header" />
-   
-<div class="container">
+<div layout:fragment="content" th:remove="tag">
     <div class="row">
         <div class="col-xs-12 text-center">Be sure to include <a href="http://daneden.github.io/animate.css/" target="_blank" title="animate.css">animate.css</a> for the animations</div>
     </div>
 </div>
 
-<script src="/jquery/jquery-3.2.1.min.js"></script>    
-<script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<script src="/js/getrequest.js"></script>
+<script src="/jquery/jquery-3.2.1.min.js" ></script>
+<script src="/bootstrap-3.3.7/js/bootstrap.min.js" ></script>
+<script src="/js/getrequest.js" ></script>
+
 </body>
 </html>

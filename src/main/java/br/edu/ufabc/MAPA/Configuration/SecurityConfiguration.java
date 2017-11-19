@@ -1,5 +1,7 @@
 package br.edu.ufabc.MAPA.Security;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -22,13 +24,30 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+	@Autowired
+	private DataSource dataSource;
+
+	private String userQuery="select email, senha from Entidade where email=?";
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+		auth.
+			jdbcAuthentication()
+				.dataSource(dataSource)
+				.usersByUsernameQuery(userQuery)
+				.passwordEncoder(bCryptPasswordEncoder);
+	}
+
 	// The configure(HttpSecurity) method defines which URL paths
 	// should be secured and which should not. 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/home").permitAll()
+				.antMatchers("/").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
@@ -38,7 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.logout()
 				.permitAll();
 	}
-
+	 
 	// Libera os recursos dentro desses caminhos, caso algum seja removido
 	// somente um usuario autenticado poderia acessa-los.
 	@Override
@@ -47,5 +66,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.ignoring()
 			.antMatchers("/css/**", "/js/**", "/jquery/**", "/bootstrap-3.3.7/**", "/images/**");
 	}
+
 }
 
