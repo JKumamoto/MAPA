@@ -7,8 +7,6 @@ import br.edu.ufabc.MAPA.Model.Setor;
 
 @Repository("SetorRepository")
 public interface SetorRepository extends JpaRepository<Setor, Integer>{
-	Setor findByNome(String Nome);
-
 }
 
 
