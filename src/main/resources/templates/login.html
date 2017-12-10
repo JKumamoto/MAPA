@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>MAPA</title>
+
+	<link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/modern-business.css" />
+
+</head>
+<body>
+
+<div class="container">
+	<div class="col-md-4 col-md-offset-4">
+		<div class="panel panel-default top caja">
+			<div class="panel-body">
+				<h3 class="text-center">Login</h3>
+				<form action="/login" method="POST" class="form-horizontal">
+					<fieldset>
+					<!-- Sign In Form -->
+					<!-- Text input-->
+					<div class="control-group">
+						<label class="control-label" for="username">Email:</label>
+						<div class="controls">
+							<input required="" id="username" name="username" type="text" class="form-control" placeholder="entidade@entidade.com.br" />
+						</div>
+					</div>
+
+					<!-- Password input-->
+					<div class="control-group">
+						<label class="control-label" for="password">Senha:</label>
+						<div class="controls">
+							<input required="" id="password" name="password" class="form-control" type="password" placeholder="********" />
+						</div>
+					</div>
+
+					<!-- Multiple Checkboxes (inline) -->
+					<div class="control-group">
+						<div class="controls">
+							<!-- <label class="checkbox inline" for="rememberme-0"> -->
+							<input type="checkbox" name="rememberme" id="rememberme-0" value="Remember me"></input>
+							<label class="control-label" for="rememberme">Remember me</label>
+						</div>
+					</div>
+
+					<div align="center" th:if="${param.error}">
+						<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+					</div>
+					<!-- Button -->
+					<div class="control-group">
+						<label class="control-label" for="signin"></label>
+						<div class="controls">
+							<button id="signin" name="signin" class="btn btn-success">Sign In</button>
+						</div>
+					</div>
+
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script src="/jquery/jquery-3.2.1.min.js" />
+<script src="/bootstrap-3.3.7/js/bootstrap.min.js" />
+<script src="/js/getrequest.js" />
+
+</body>
+</html>
+

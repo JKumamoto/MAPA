@@ -6,162 +6,44 @@
 <body>
 
 <th:block th:fragment="header">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-		<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-		<span class="sr-only">Toggle navigation</span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		<span class="icon-bar"></span>
-		</button>
-			<a class="navbar-brand" href="/">MAPA</a>
-		</div>
-		<div id="navbar" class="collapse navbar-collapse">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="/">Home</a></li>
-				<li><a href="">About</a></li>
-			</ul>
-			<div class="col-sm-3 col-md-3">
-				<form class="navbar-form" role="search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search" name="q" />
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-						</div>
-					</div>
-				</form>
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+				<a class="navbar-brand" href="/">MAPA</a>
 			</div>
-			<ul class="nav navbar-nav navbar-right">
-				<li>
-					<a href="#signup" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Register</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>
- 
-
-<!-- Modal -->
-<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<br/>
-			<div class="bs-example bs-example-tabs">
-				<ul id="myTab" class="nav nav-tabs">
-					<li class="active"><a href="#signin" data-toggle="tab">Login</a></li>
-					<li class=""><a href="#signup" data-toggle="tab">Registrar</a></li>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="">About</a></li>
+				</ul>
+				<div class="col-sm-3 col-md-3">
+					<form class="navbar-form" role="search" action="/searchResults" method="POST" >
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" name="q" />
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<ul class="nav navbar-nav navbar-right" >
+					<li><a href="/login">Login</a></li>
+					<li><a href="/registrar">Registrar</a></li>
 				</ul>
 			</div>
-			<div class="modal-body">
-				<div id="myTabContent" class="tab-content">
-					<div class="tab-pane fade active in" id="signin">
-						<form action="/login" class="form-horizontal">
-							<div class="form-group ${error != null ? 'has-error' : ''}">
-							<fieldset>
-							<!-- Sign In Form -->
-							<span>${message}</span>
-							<!-- Text input-->
-							<div class="control-group">
-								<label class="control-label" for="userid">Email:</label>
-								<div class="controls">
-									<input required="" id="userid" name="userid" type="text" class="form-control" placeholder="entidade@entidade.com.br"></input>
-								</div>
-							</div>
-
-							<!-- Password input-->
-							<div class="control-group">
-								<label class="control-label" for="passwordinput">Password:</label>
-								<div class="controls">
-									<input required="" id="passwordinput" name="passwordinput" class="form-control" type="password" placeholder="********"></input>
-								</div>
-							</div>
-							<span>${error}</span>
-
-							<!-- Multiple Checkboxes (inline) -->
-							<div class="control-group">
-								<div class="controls">
-									<!-- <label class="checkbox inline" for="rememberme-0"> -->
-									<input type="checkbox" name="rememberme" id="rememberme-0" value="Remember me"></input>
-									<label class="control-label" for="rememberme">Remember me</label>
-								</div>
-							</div>
-
-							<!-- Button -->
-							<div class="control-group">
-								<label class="control-label" for="signin"></label>
-								<div class="controls">
-									<button id="signin" name="signin" class="btn btn-success">Sign In</button>
-								</div>
-							</div>
-							</fieldset>
-							</div>
-						</form>
-					</div>
-
-					<div class="tab-pane fade" id="signup">
-						<form action="/registrar" class="form-horizontal">
-						<fieldset>
-						<!-- Sign Up Form -->
-						<!-- Text input-->
-						<div class="control-group">
-							<label class="control-label" for="Email">Email:</label>
-							<div class="controls">
-								<input id="Email" name="Email" class="form-control" type="text" placeholder="JoeSixpack@sixpacksrus.com" required=""></input>
-							</div>
-						</div>
-
-						<!-- Text input-->
-						<div class="control-group">
-							<label class="control-label" for="userid">Alias:</label>
-							<div class="controls">
-								<input id="userid" name="userid" class="form-control" type="text" placeholder="JoeSixpack" required=""></input>
-							</div>
-						</div>
-						
-						<!-- Password input-->
-						<div class="control-group">
-							<label class="control-label" for="password">Password:</label>
-							<div class="controls">
-								<input id="password" name="password" class="form-control" type="password" placeholder="********" required=""></input>
-							</div>
-						</div>
-
-						<!-- Text input-->
-						<div class="control-group">
-							<label class="control-label" for="reenterpassword">Re-Enter Password:</label>
-							<div class="controls">
-								<input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="********" required=""></input>
-							</div>
-						</div>
-						
-						<!-- Button -->
-						<div class="control-group">
-							<label class="control-label" for="confirmsignup"></label>
-							<div class="controls">
-								<button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
-							</div>
-						</div>
-						</fieldset>
-						</form>
-					</div>
-				</div>
-			</div>
-
-			<div class="modal-footer">
-				<center>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</center>
-			</div>
 		</div>
-	</div>
-</div>
-
+	</nav>
 </th:block>
 
-	<script src="/jquery/jquery-3.2.1.min.js" ></script>
-	<script src="/bootstrap-3.3.7/js/bootstrap.min.js" ></script>
-	<script src="/js/getrequest.js" ></script>
+<script src="/jquery/jquery-3.2.1.min.js" />
+<script src="/bootstrap-3.3.7/js/bootstrap.min.js" />
+<script src="/js/getrequest.js" />
 
 </body>
 </html>

@@ -1,4 +1,4 @@
-package br.edu.ufabc.MAPA.Security;
+package br.edu.ufabc.MAPA.Configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Autowired
-	private UserDetailsService entidadeDetailsService;
+	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
@@ -35,15 +38,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/entidade", "/searchResults").permitAll()
+				.antMatchers("/", "/registrar", "/login",  "/entidade", "/searchResults").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.loginPage("/login")
-				.permitAll()
 				.and()
 			.logout()
-				.permitAll();
+				.permitAll()
+				.and()
+			.csrf().disable();
 	}
 	 
 	// Libera os recursos dentro desses caminhos, caso algum seja removido
@@ -57,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(entidadeDetailsService).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
 }

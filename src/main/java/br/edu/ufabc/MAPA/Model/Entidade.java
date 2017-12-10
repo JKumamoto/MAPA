@@ -1,6 +1,5 @@
 package br.edu.ufabc.MAPA.Model;
 
-import java.util.Calendar;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,9 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
@@ -40,21 +38,16 @@ public class Entidade{
 	@Transient
 	private String senha;
 
-	@Temporal(TemporalType.DATE)
-	private Calendar fundacao;
-
-	private String setor;
-	private boolean reconhecimento_institucional;
 	private String descricao;
-	private String comunicao_externa;
+	private String resumo;
+
+	@Lob
+	@Column(name="imagem", columnDefinition="longblob")
+	private byte[] imagem;
 
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "entidade_tags", joinColumns = @JoinColumn(name = "entidade_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
 	private Set<Tag> tags;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "entidade_setor", joinColumns = @JoinColumn(name = "entidade_id"), inverseJoinColumns = @JoinColumn(name = "setor_id"))
-	private Set<Setor> setores;
 
 	public int getId(){
 		return id;
@@ -88,22 +81,6 @@ public class Entidade{
 		this.senha=senha;
 	}
 
-	public Calendar getFundacao(){
-		return fundacao;
-	}
-
-	public void setFundacao(Calendar fundacao){
-		this.fundacao=fundacao;
-	}
-
-	public boolean getReconhecimento_institucional(){
-		return reconhecimento_institucional;
-	}
-
-	public void setReconhecimento_institucional(boolean reconhecimento_institucional){
-		this.reconhecimento_institucional=reconhecimento_institucional;
-	}
-
 	public String getDescricao(){
 		return descricao;
 	}
@@ -112,12 +89,20 @@ public class Entidade{
 		this.descricao=descricao;
 	}
 
-	public String getComunicao_externa(){
-		return comunicao_externa;
+	public String getResumo(){
+		return resumo;
 	}
 
-	public void setComunicao_externa(String comunicao_externa){
-		this.comunicao_externa=comunicao_externa;
+	public void setResumo(String resumo){
+		this.resumo=resumo;
+	}
+
+	public byte[] getImagem(){
+		return imagem;
+	}
+
+	public void setImagem(byte[] imagem){
+		this.imagem=imagem;
 	}
 
 	public Set<Tag> getTags(){
@@ -127,6 +112,6 @@ public class Entidade{
 	public void setTags(Set<Tag> tags){
 		this.tags=tags;
 	}
-	
+
 }
 

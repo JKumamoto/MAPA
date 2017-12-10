@@ -39,14 +39,19 @@
 					</a>
 				</div>
 				<div class="col-md-5">
-					<h3>Project One</h3>
+					<h3 th:text="${entidade.nome}" >Project</h3>
 					<h4>Subheading</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.</p>
-					<a class="btn btn-primary" href="portfolio-item.html">View Project</a>
+					<a class="btn btn-primary" th:href="@{/entidade(id=${entidade.id})}">View Project</a>
 				</div>
 			</div>
 			<!-- /.row -->
 			<hr />
+		</div>
+	</div>
+	<div th:unless="${not #lists.isEmpty(searchResults)}">
+		<div class="row">
+			<h3>Não existe nenhuma entidade com este nome</h3>
 		</div>
 	</div>
 

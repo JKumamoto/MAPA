@@ -48,6 +48,13 @@ header.carousel .fill {
     font-size: 100px;
 }
 
+.top{
+	margin-top: 40%;
+}
+
+.caja{
+	border-radius: 5px;
+}
 /* Pricing Page Styles */
 
 .price {
