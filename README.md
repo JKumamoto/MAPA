@@ -35,11 +35,11 @@ Adicione a base de dados para a aplicação:
 
 Para verificar a criação da base de dados: 
 
-mysql> SHOW DATABASES;
+```mysql> SHOW DATABASES;```
 
 Dentro da pasta MAPA, execute o Maven para compilação dos código JAVA e execução do servidor:
 
-./mvnw spring-boot:run
+```./mvnw spring-boot:run```
 
 Acesse a aplicação através do navegador em: 
 
