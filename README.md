@@ -23,15 +23,15 @@ Próximas versões:
 
 Faça o download dos arquivos em formato .ZIP ou obtenha os arquivos através do git, pelo terminal: 
 
-git clone https://github.com/JKumamoto/MAPA
+```git clone https://github.com/JKumamoto/MAPA```
 
 Inicie o banco de dados MySQL:
 
-mysql -u root -p
+```mysql -u root -p```
 
 Adicione a base de dados para a aplicação:
 
-mysql> CREATE DATABASE MAPA; 
+```mysql> CREATE DATABASE MAPA;```
 
 Para verificar a criação da base de dados: 
 
