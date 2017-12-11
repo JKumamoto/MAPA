@@ -10,93 +10,108 @@
 </head>
 <body>
 
-<div th:replace="fragments/header :: header" />
-
-<!-- Header Carousel -->
-<header id="myCarousel" class="carousel slide">
-	<!-- Indicators -->
-	<ol class="carousel-indicators">
-		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		<li data-target="#myCarousel" data-slide-to="1"></li>
-		<li data-target="#myCarousel" data-slide-to="2"></li>
-	</ol>
-
-	<!-- Wrapper for slides -->
-	<div class="carousel-inner">
-		<div class="item active">
-		<div class="fill" style="background-image:url('http://placehold.it/1900x1080');" />
-			<div class="carousel-caption d-none d-md-block">
-				<h2>Caption 1</h2>
-				<p>This is a description for the first slide.</p>
+<div th:unless="${user}">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+				<a class="navbar-brand" href="/">MAPA</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="">About</a></li>
+				</ul>
+				<div class="col-sm-3 col-md-3">
+					<form class="navbar-form" role="search" action="/searchResults" method="POST" >
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" name="q" />
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<ul class="nav navbar-nav navbar-right" >
+					<li><a href="/login">Login</a></li>
+					<li><a href="/registrar">Registrar</a></li>
+				</ul>
 			</div>
 		</div>
-		<div class="item">
-		<div class="fill" style="background-image:url('http://placehold.it/1900x1080');" />
-			<div class="carousel-caption d-none d-md-block">
-				<h2>Caption 2</h2>
-				<p>This is a description for the second slide.</p>
+	</nav>
+</div>
+<div th:if="${user}">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+				<a class="navbar-brand" href="/">MAPA</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="/">Home</a></li>
+					<li><a href="">About</a></li>
+				</ul>
+				<div class="col-sm-3 col-md-3">
+					<form class="navbar-form" role="search" action="/searchResults" method="POST" >
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search" name="q" />
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<ul class="nav navbar-nav navbar-right" >
+					<li><a href="" th:text="${user}">User</a></li>
+					<li><a href="/logout">Logout</a></li>
+				</ul>
 			</div>
 		</div>
-		<div class="item">
-		<div class="fill" style="background-image:url('http://placehold.it/1900x1080');" />
-			<div class="carousel-caption d-none d-md-block">
-				<h2>Caption 3</h2>
-				<p>This is a description for the third slide.</p>
-			</div>
-		</div>
-	</div>
+	</nav>
+</div>
 
-	<!-- Controls -->
-	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-		<span class="icon-prev" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-	</a>
-	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-		<span class="icon-next" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-	</a>
-</header>
 
 <div class="container">
 
-	<!-- Portfolio Section -->
+	<!-- Page Heading/Breadcrumbs -->
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">Portfolio Heading</h2>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<div class="panel panel-default">
-					<a href="portfolio-item.html">
-						<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="" />
-					</a>
-				<div class="panel-body">
-					<h4><a href="#">Project One</a></h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<a href="portfolio-item.html">
-						<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="" />
-					</a>
-					<h4><a href="#">Project Two</a></h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 col-sm-6">
-			<div class="panel panel-default">
-					<h4><a href="#">Project Three</a></h4>
-					<a href="portfolio-item.html">
-						<img class="img-responsive img-portfolio img-hover" src="http://placehold.it/700x450" alt="" />
-					</a>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, optio corporis quae nulla aspernatur in alias at numquam rerum ea excepturi expedita tenetur assumenda voluptatibus eveniet incidunt dicta nostrum quod?</p>
-			</div>
+			<h1 class="page-header" th:text="${entidadeDetails.nome}">Entidade</h1>
 		</div>
 	</div>
 	<!-- /.row -->
+
+	<!-- Image Header -->
+	<div class="row">
+		<div class="col-lg-12">
+			<img class="img-responsive" src="http://placehold.it/1200x300" alt="" />
+		</div>
+	</div>
+	<!-- /.row -->
+
+	<!-- Service Tabs -->
+	<div class="row">
+		<div class="col-lg-12">
+			<h2 class="page-header">Service Tabs</h2>
+		</div>
+		<div class="col-lg-12">
+			<p th:text="${entidadeDetails.descricao}">Descricao</p>
+			<h4>Service One</h4>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat asperiores.</p>
+		</div>
+	</div>
 
 </div>
 
@@ -108,3 +123,4 @@
 
 </body>
 </html>
+

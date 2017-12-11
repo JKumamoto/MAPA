@@ -54,6 +54,11 @@ public class EntidadeServiceImpl implements EntidadeService, UserDetailsService{
 	}
 
 	@Override
+	public List<Entidade> findAll(){
+		return entidadeRepository.findAll();
+	}
+
+	@Override
 	public List<Entidade> findEntidadeByNome(String nome){
 		return entidadeRepository.findByNome(nome);
 	}

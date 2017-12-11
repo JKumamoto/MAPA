@@ -1,10 +1,10 @@
 package br.edu.ufabc.MAPA.Controller;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,14 +25,21 @@ public class MainController{
 	private SecurityService securityService;
 
     @RequestMapping(value="/", method=RequestMethod.GET)
-    public String home(Model model){
-        return "home";
+    public String index(Model model){
+		List<Entidade> list=entidadeService.findAll();
+		model.addAttribute("entidades", list);
+
+		model.addAttribute("user",  securityService.findLoggedInUsername() );
+
+        return "index";
     }
 
 	@RequestMapping(value="/entidade", method=RequestMethod.GET)
 	public String entidade(Model model, @RequestParam("id") int id){
 		Entidade entidade=entidadeService.findEntidadeById(id);
 		model.addAttribute("entidadeDetails", entidade);
+
+		model.addAttribute("user",  securityService.findLoggedInUsername() );
 
 		return "entidade";
 	}
@@ -41,6 +48,9 @@ public class MainController{
 	public String search(Model model, @RequestParam("q") String q){
 		List<Entidade> lista=entidadeService.findEntidadeByNome(q);
 		model.addAttribute("searchResults", lista);
+
+		model.addAttribute("user",  securityService.findLoggedInUsername() );
+
 		return "searchResults";
 	}
 
@@ -61,7 +71,7 @@ public class MainController{
 	}
 
 	@RequestMapping(value="/registrar", method=RequestMethod.POST)
-	public String registration(Model model, @RequestParam String email, @RequestParam String nome, @RequestParam String senha, @RequestParam String senha2){
+	public String registration(Model model, @RequestParam String email, @RequestParam String nome, @RequestParam String senha, @RequestParam String senha2, HttpServletRequest request){
 		if(!senha.equals(senha2)){
 			model.addAttribute("error", "senha diferentes");
 			return "registrar";
@@ -79,19 +89,14 @@ public class MainController{
 		entidade.setSenha(senha);
 		entidadeService.saveEntidade(entidade);
 
-		securityService.autologin(entidade.getEmail(), entidade.getSenha());
+		securityService.autologin(entidade.getEmail(), entidade.getSenha(), request);
 
-		return "redirect:/admin";
+		return "redirect:/";
 	}
 
-	@RequestMapping(value="/admin", method = RequestMethod.GET)
-	public String admin(Model model){
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		Entidade entidade=entidadeService.findEntidadeByEmail(auth.getName());
-		model.addAttribute("userName", "Welcome " + entidade.getNome() + " (" + entidade.getEmail() + ")");
-		model.addAttribute("adminMessage","Content Available Only for Users with Admin Role");
-
-		return "admin";
+	@RequestMapping(value="/home", method = RequestMethod.GET)
+	public String home(Model model){
+		return "home";
 	}
 
 }
