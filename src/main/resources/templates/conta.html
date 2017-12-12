@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>MAPA</title>
+	<title>Home</title>
 
 	<link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/modern-business.css" />
 
 </head>
 <body>
-
 
 <div th:unless="${user}">
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -89,46 +88,75 @@
 	</nav>
 </div>
 
-<!-- Page Content -->
 <div class="container">
-
-	<!-- Page Heading/Breadcrumbs -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header" th:text="${entidadeDetails.nome}">Entidade</h1>
-			<h4 th:text="${entidadeDetails.resumo}">Resumo</h4>
-			<span th:each="tag : ${entidadeDetails.tags}">
-				<span class="label"><a th:href="@{/tag(id=${tag.id})}" th:text="${tag.nome}">Tag</a></span>
-			</span>
-		</div>
-	</div>
-	<!-- /.row -->
 
 	<br />
 
-	<!-- Image Header -->
-	<div class="row">
-		<div class="col-lg-12">
-			<div th:if="${entidadeDetails.imagem}">
-				<img class="img-responsive img-portfolio img-hover" src="${entidadeDetails.imagem}" alt="" />
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+			<div class="list-group">
+				<a href="/settings" class="list-group-item">Settings</a>
+				<a href="/image" class="list-group-item">Mudar Imagem</a>
+				<a href="/conta" class="list-group-item active">Conta</a>
 			</div>
-			<div th:unless="${entidadeDetails.imagem}">
-				<img class="img-responsive" src="http://placehold.it/1200x300" alt="" />
+		</div><!--/.sidebar-offcanvas-->	
+
+		<div class="col-xs-12 col-sm-9">
+			<div class="panel panel-default caja">
+				<div class="panel-heading">
+					<h3>Mudar Senha</h3>
+					<form action="/updateSenha" method="POST" class="form-horizontal">
+					<fieldset>
+						<div class="control-group">
+							<label class="control-label" for="senha1">Nova Senha:</label>
+							<div class="controls">
+								<input id="senha1" name="senha1" class="form-control" type="password" placeholder="********" required="" />
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="senha2">Confirmar Nova Senha:</label>
+							<div class="controls">
+								<input id="senha2" name="senha2" class="form-control" type="password" placeholder="********" required="" />
+							</div>
+						</div>
+
+						<div class="control-group" align="center" th:if="${error}">
+							<p style="font-size: 20; color: #FF1C19;" th:text="${error}" >Erro</p>
+						</div>
+						<!-- Button -->
+						<div class="control-group">
+							<label class="control-label" for="confirmsignup"></label>
+							<div class="controls">
+								<button id="confirmsignup" name="confirmsignup" class="btn btn-success">Atualizar Senha</button>
+							</div>
+						</div>
+						<div class="control-group" align="center" th:if="${message}">
+							<p style="font-size: 20; color: green;" th:text="${message}" >Mensagem</p>
+						</div>
+					</fieldset>
+					</form>
+				</div>
+				<div class="panel-body">
+					<h3 style="color: #FF1C19">Apagar Conta</h3>
+					<form action="/delete" method="POST" class="form-horizontal">
+					<fieldset>
+						<p>Once you delete your account, there is no going back. Please be certain.</p>
+						<!-- Button -->
+						<div class="control-group">
+							<label class="control-label" for="confirmsignup"></label>
+							<div class="controls">
+								<button id="confirmsignup" name="confirmsignup" class="btn btn-danger">Deletar</button>
+							</div>
+						</div>
+					</fieldset>
+					</form>
+				</div>
 			</div>
 		</div>
+	
 	</div>
-	<!-- /.row -->
-
-	<hr />
-
-	<!-- Service Tabs -->
-	<div class="row">
-		<div class="col-lg-12">
-			<div th:text="${entidadeDetails.descricao}">Descricao</div>
-		</div>
-	</div>
-
 </div>
+
 
 <div th:replace="fragments/footer :: footer" />
 
@@ -138,3 +166,4 @@
 
 </body>
 </html>
+

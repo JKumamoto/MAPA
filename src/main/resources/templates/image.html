@@ -2,14 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>MAPA</title>
+	<title>Home</title>
 
 	<link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="/css/modern-business.css" />
 
 </head>
 <body>
-
 
 <div th:unless="${user}">
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -89,46 +88,41 @@
 	</nav>
 </div>
 
-<!-- Page Content -->
 <div class="container">
-
-	<!-- Page Heading/Breadcrumbs -->
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="page-header" th:text="${entidadeDetails.nome}">Entidade</h1>
-			<h4 th:text="${entidadeDetails.resumo}">Resumo</h4>
-			<span th:each="tag : ${entidadeDetails.tags}">
-				<span class="label"><a th:href="@{/tag(id=${tag.id})}" th:text="${tag.nome}">Tag</a></span>
-			</span>
-		</div>
-	</div>
-	<!-- /.row -->
 
 	<br />
 
-	<!-- Image Header -->
-	<div class="row">
-		<div class="col-lg-12">
-			<div th:if="${entidadeDetails.imagem}">
-				<img class="img-responsive img-portfolio img-hover" src="${entidadeDetails.imagem}" alt="" />
+	<div class="row row-offcanvas row-offcanvas-left">
+		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+			<div class="list-group">
+				<a href="/settings" class="list-group-item">Settings</a>
+				<a href="/image" class="list-group-item active">Mudar Imagem</a>
+				<a href="/conta" class="list-group-item">Conta</a>
 			</div>
-			<div th:unless="${entidadeDetails.imagem}">
-				<img class="img-responsive" src="http://placehold.it/1200x300" alt="" />
-			</div>
+		</div><!--/.sidebar-offcanvas-->	
+
+		<div class="col-xs-12 col-sm-9">
+			<!-- imagem upload -->
+			<form action="/uploadImage" method="POST" enctype="multipart/form-data">
+				<div class="control-group">
+					<label class="control-label" for="file">Imagem:</label>
+					<div class="controls">
+						<input type="file" name="file" id="file" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="confirmsignup"></label>
+					<div class="controls">
+						<button id="confirmsignup" name="confirmsignup" class="btn btn-success">Enviar</button>
+					</div>
+				</div>
+			</form>
+			<!-- imagem upload -->
 		</div>
+	
 	</div>
-	<!-- /.row -->
-
-	<hr />
-
-	<!-- Service Tabs -->
-	<div class="row">
-		<div class="col-lg-12">
-			<div th:text="${entidadeDetails.descricao}">Descricao</div>
-		</div>
-	</div>
-
 </div>
+
 
 <div th:replace="fragments/footer :: footer" />
 
@@ -138,3 +132,5 @@
 
 </body>
 </html>
+
+

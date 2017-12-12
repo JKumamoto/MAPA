@@ -50,9 +50,10 @@
 					</div>
 				</div>
 				
-				<div align="center" th:if="${param.error}">
-					<p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+				<div class="control-group" align="center" th:if="${error}">
+					<p style="font-size: 20; color: #FF1C19;" th:text="${error}" >Erro</p>
 				</div>
+
 				<!-- Button -->
 				<div class="control-group">
 					<label class="control-label" for="confirmsignup"></label>

@@ -73,8 +73,15 @@
 					</form>
 				</div>
 				<ul class="nav navbar-nav navbar-right" >
-					<li><a href="" th:text="${user}">User</a></li>
-					<li><a href="/logout">Logout</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toogle" data-toggle="dropdown" href="#" th:text="${user}">User
+						<span class="caret" /></a>
+						<ul class="dropdown-menu" >
+							<li><a href="/settings">Settings</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/logout">Logout</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -150,9 +157,9 @@
 							<div th:if="${entidade.resumo}">
 								<p th:text="${entidade.resumo}">Resumo</p>
 							</div>
-							<div th:each="tag : ${entidade.tags}">
-								<p th:text="${tag.nome}">Tag</p>
-							</div>
+							<span th:each="tag : ${entidade.tags}">
+								<span class="label"><a th:href="@{/tag(id=${tag.id})}" th:text="${tag.nome}">Tag</a></span>
+							</span>
 						</div>
 					</div>
 				</div>

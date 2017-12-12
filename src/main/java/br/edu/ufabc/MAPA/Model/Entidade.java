@@ -13,11 +13,6 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.data.annotation.Transient;
-
 @Entity // Hibernate cria uma tabela dessa classe
 public class Entidade{
 
@@ -26,18 +21,9 @@ public class Entidade{
 	@Column(name="id", nullable=false)
 	private int id;
 
-	@NotEmpty(message = "*Nome da instituicao")
 	private String nome;
-
-	@Email(message = "*Please provide a valid Email")
-	@NotEmpty(message = "*Please provide an email")
 	private String email;
-
-	@Length(min = 5, message = "*Your password must have at least 5 characters")
-	@NotEmpty(message = "*Please provide your password")
-	@Transient
 	private String senha;
-
 	private String descricao;
 	private String resumo;
 

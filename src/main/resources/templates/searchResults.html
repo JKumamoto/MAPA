@@ -73,8 +73,15 @@
 					</form>
 				</div>
 				<ul class="nav navbar-nav navbar-right" >
-					<li><a href="" th:text="${user}">User</a></li>
-					<li><a href="/logout">Logout</a></li>
+					<li class="dropdown">
+						<a class="dropdown-toogle" data-toggle="dropdown" href="#" th:text="${user}">User
+						<span class="caret" /></a>
+						<ul class="dropdown-menu" >
+							<li><a href="/settings">Settings</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/logout">Logout</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -87,12 +94,10 @@
 	<!-- Page Heading/Breadcrumbs -->
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">One Column Portfolio
-				<small>Subheading</small>
-			</h1>
+			<h1 class="page-header">Resultados de Busca</h1>
 			<ol class="breadcrumb">
 				<li><a href="/">Home</a></li>
-				<li class="active">One Column Portfolio</li>
+				<li class="active">Resultados</li>
 			</ol>
 		</div>
 	</div>
@@ -103,18 +108,24 @@
 		<div th:each="entidade : ${searchResults}">
 			<div class="row">
 				<div class="col-md-7">
-					<a href="portfolio-item.html">
-						<img class="img-responsive img-hover" src="http://placehold.it/700x300" alt="" />
-					</a>
+					<div th:if="${entidade.imagem}">
+						<img class="img-responsive img-portfolio img-hover" src="${entidade.imagem}" alt="" />
+					</div>
+					<div th:unless="${entidade.imagem}">
+						<a th:href="@{/entidade(id=${entidade.id})}">
+							<img class="img-responsive img-hover" src="http://placehold.it/700x300" alt="" />
+						</a>
+					</div>
 				</div>
 				<div class="col-md-5">
 					<h3 th:text="${entidade.nome}" >Project</h3>
 					<div th:if="${entidade.resumo}">
 						<p th:text="${entidade.resumo}">Resumo</p>
 					</div>
-					<div th:each="tag : ${entidade.tags}">
-						<p th:text="${tag.nome}">Tag</p>
-					</div>
+					<span th:each="tag : ${entidade.tags}">
+						<span class="label"><a th:href="@{/tag(id=${tag.id})}" th:text="${tag.nome}">Tag</a></span>
+					</span>
+					<hr />
 					<a class="btn btn-primary" th:href="@{/entidade(id=${entidade.id})}">View Project</a>
 				</div>
 			</div>
@@ -127,36 +138,6 @@
 			<h3>Não existe nenhuma entidade com este nome</h3>
 		</div>
 	</div>
-
-	<!-- Pagination -->
-	<div class="row text-center">
-		<div class="col-lg-12">
-			<ul class="pagination">
-				<li>
-					<a href="#">&laquo;</a>
-				</li>
-				<li class="active">
-					<a href="#">1</a>
-				</li>
-				<li>
-					<a href="#">2</a>
-				</li>
-				<li>
-					<a href="#">3</a>
-				</li>
-				<li>
-					<a href="#">4</a>
-				</li>
-				<li>
-					<a href="#">5</a>
-				</li>
-				<li>
-					<a href="#">&raquo;</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!-- /.row -->
 
 </div>
 
