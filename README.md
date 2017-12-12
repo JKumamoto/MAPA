@@ -25,6 +25,7 @@ Faça o download dos arquivos em formato .ZIP ou obtenha os arquivos através do
 
 ```git clone https://github.com/JKumamoto/MAPA```
 
+Coloque os arquivos no diretório da máquina que funionará como servidor.
 Inicie o banco de dados MySQL:
 
 ```mysql -u root -p```
@@ -41,7 +42,7 @@ Dentro da pasta MAPA, execute o Maven para compilação dos código JAVA e execu
 
 ```./mvnw spring-boot:run```
 
-Acesse a aplicação através do navegador em: 
+Acesse a aplicação localmente através do navegador em: 
 
 localhost:8080/
 
